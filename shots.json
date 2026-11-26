@@ -1,0 +1,6 @@
+[
+  { "name": "01-chase-approach.jpg", "query": "?shot=chase&seed=1" },
+  { "name": "02-cockpit-canyon.jpg", "query": "?shot=cockpit&seed=1" },
+  { "name": "03-storm-rescue.jpg", "query": "?shot=storm&seed=1" },
+  { "name": "04-runway-touchdown.jpg", "query": "?shot=touchdown&seed=1" }
+]
