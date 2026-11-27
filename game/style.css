@@ -1,47 +1,48 @@
-/* Caldera Wind — Aviation Glass UI & Flight Deck Overlays */
-:root{--bg:#0b141d;--panel:rgba(9,19,29,.84);--border:rgba(114,232,194,.36);--accent:#56f7b0;--amber:#f5b342;--red:#ff5656;--txt:#edf6f9;--muted:#9eb7c7;--ui:'Segoe UI',system-ui,-apple-system,sans-serif;--mono:'JetBrains Mono',ui-monospace,Menlo,monospace}
-*{box-sizing:border-box;user-select:none}
-html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--txt);font-family:var(--ui)}
-#game-canvas,#hud-canvas{position:fixed;inset:0;width:100%;height:100%;display:block}
-#hud-canvas{pointer-events:none}
-.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
-.overlay-root{position:fixed;inset:0;pointer-events:none;display:flex;align-items:center;justify-content:center;padding:24px;z-index:10}
-.overlay-root.dock-right{justify-content:flex-end;padding-right:26px}
-.flight-card{pointer-events:auto;background:var(--panel);border:1px solid var(--border);border-radius:12px;box-shadow:0 22px 60px rgba(0,0,0,.58),inset 0 1px 0 rgba(255,255,255,.08);backdrop-filter:blur(10px);padding:22px 26px;max-width:680px;width:100%}
-.flight-card.compact-debrief{max-width:382px;padding:16px 20px;background:rgba(8,17,26,.9);border-color:rgba(86,247,176,.52)}
-.flight-card.crash-card{max-width:480px;border-color:rgba(255,86,86,.65);background:rgba(24,10,14,.88)}
-.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:0 0 6px}
-.eyebrow.danger{color:var(--red)}
-.card-title{margin:0 0 6px;font-size:28px;font-weight:800;letter-spacing:.04em;line-height:1.1}
-.compact-debrief .card-title{font-size:22px}
-.card-subtitle{margin:0 0 16px;font-size:13.5px;color:var(--muted);line-height:1.45}
-.mission-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:16px}
-.compact-debrief .mission-grid{grid-template-columns:1fr;gap:6px;margin-bottom:12px}
-.mission-btn{text-align:left;background:rgba(18,34,49,.72);border:1px solid rgba(158,183,199,.22);border-radius:8px;padding:10px 12px;color:var(--txt);cursor:pointer;transition:border-color .15s,background .15s}
-.mission-btn:hover{border-color:rgba(86,247,176,.65);background:rgba(24,48,66,.85)}
-.mission-btn.active{border-color:var(--accent);background:rgba(23,61,68,.86);box-shadow:inset 0 0 0 1px rgba(86,247,176,.35)}
-.mission-name{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700;margin-bottom:3px}
-.mission-tag{font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;background:rgba(86,247,176,.14);color:var(--accent);letter-spacing:.05em}
-.mission-tag.storm{background:rgba(245,179,66,.18);color:var(--amber)}
-.mission-tag.emergency{background:rgba(255,86,86,.18);color:var(--red)}
-.mission-desc{font-size:11.5px;color:var(--muted);line-height:1.35}
-.metrics-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:14px}
-.metric-box{background:rgba(14,28,41,.78);border:1px solid rgba(158,183,199,.18);border-radius:7px;padding:8px 10px}
-.metric-label{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
-.metric-value{font-family:var(--mono);font-size:16px;font-weight:700;color:var(--txt);margin-top:2px}
-.metric-value.good{color:var(--accent)}
-.metric-value.warn{color:var(--amber)}
-.metric-value.bad{color:var(--red)}
-.grade-banner{display:flex;align-items:center;justify-content:space-between;background:rgba(16,46,44,.78);border:1px solid rgba(86,247,176,.5);border-radius:8px;padding:10px 14px;margin-bottom:12px}
-.grade-badge{font-family:var(--mono);font-size:30px;font-weight:800;color:var(--accent);line-height:1}
-.grade-note{font-size:12.5px;color:var(--txt);font-weight:700}
-.grade-sub{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:2px}
-.crash-reason-box{background:rgba(74,18,22,.65);border:1px solid rgba(255,86,86,.5);border-radius:8px;padding:10px 12px;margin-bottom:14px;font-family:var(--mono);font-size:12.5px;color:#ffd0d0;line-height:1.4}
-.controls-strip{display:flex;flex-wrap:wrap;gap:6px 12px;font-family:var(--mono);font-size:11px;color:var(--muted);padding:10px 12px;border-radius:7px;background:rgba(10,22,33,.72);border:1px solid rgba(158,183,199,.15);margin-bottom:16px}
-.controls-strip kbd{background:rgba(255,255,255,.11);color:var(--txt);padding:1px 5px;border-radius:4px;font-family:var(--mono);font-size:10.5px}
-.action-row{display:flex;gap:10px;justify-content:flex-end}
-.btn-primary,.btn-secondary{border-radius:7px;padding:10px 18px;font-size:13px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;border:1px solid transparent;transition:transform .12s,background .15s}
-.btn-primary{background:var(--accent);color:#071915}
-.btn-primary:hover{background:#77ffbe;transform:translateY(-1px)}
-.btn-secondary{background:rgba(255,255,255,.08);border-color:rgba(158,183,199,.28);color:var(--txt)}
-.btn-secondary:hover{background:rgba(255,255,255,.15)}
+/* Caldera Wind — Aviation Glass UI & Bottom-Docked Flight-Recorder Strip */
+:root{--bg:#0b141d;--panel:rgba(9,19,29,0.84);--border:rgba(114,232,194,0.38);--accent:#58f7b2;--amber:#f5b342;--red:#ff5656;--txt:#edf6f9;--muted:#9eb7c7;--ui:'Segoe UI',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,Menlo,monospace;}
+*{box-sizing:border-box;user-select:none;}
+html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--txt);font-family:var(--ui);}
+#game-canvas,#hud-canvas{position:fixed;inset:0;width:100%;height:100%;display:block;}
+#hud-canvas{pointer-events:none;}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;}
+.overlay-root{position:fixed;inset:0;pointer-events:none;display:flex;align-items:center;justify-content:center;padding:20px;z-index:10;}
+.overlay-root.dock-bottom{align-items:flex-end;padding:0 18px 14px;}
+.flight-card{pointer-events:auto;background:var(--panel);border:1px solid var(--border);border-radius:12px;box-shadow:0 22px 60px rgba(0,0,0,0.58);backdrop-filter:blur(10px);padding:22px 26px;max-width:680px;width:100%;}
+.flight-card.compact-modal{max-width:440px;padding:18px 22px;}
+.flight-card.crash-card{max-width:480px;border-color:rgba(255,86,86,0.65);background:rgba(24,10,14,0.88);}
+.debrief-bar{pointer-events:auto;width:100%;max-width:1244px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 18px;background:rgba(7,17,26,0.86);border:1px solid rgba(88,247,178,0.55);border-radius:10px;backdrop-filter:blur(10px);box-shadow:0 12px 36px rgba(0,0,0,0.52);}
+.debrief-grade-block{display:flex;align-items:center;gap:14px;}
+.grade-badge{font-family:var(--mono);font-size:38px;font-weight:800;color:var(--accent);line-height:1;padding:6px 14px;border-radius:8px;background:rgba(16,52,46,0.78);border:1px solid rgba(88,247,178,0.55);}
+.grade-note{font-size:14px;font-weight:700;color:var(--txt);letter-spacing:0.03em;}
+.grade-sub{font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:2px;}
+.debrief-metrics{display:flex;gap:8px;}
+.debrief-actions{display:flex;flex-direction:column;align-items:flex-end;gap:7px;}
+.sortie-pills{display:flex;gap:6px;flex-wrap:wrap;}
+.sortie-pill{background:rgba(18,36,50,0.8);border:1px solid rgba(158,183,199,0.25);border-radius:5px;padding:4px 8px;color:var(--muted);font-family:var(--mono);font-size:10.5px;cursor:pointer;}
+.sortie-pill.active,.sortie-pill:hover{border-color:var(--accent);color:var(--txt);background:rgba(20,62,66,0.85);}
+.eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin:0 0 3px;}
+.eyebrow.danger{color:var(--red);}
+.card-title{margin:0 0 6px;font-size:26px;font-weight:800;letter-spacing:0.04em;}
+.card-subtitle{margin:0 0 14px;font-size:13px;color:var(--muted);line-height:1.45;}
+.mission-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:14px;}
+.mission-btn{text-align:left;background:rgba(18,34,49,0.72);border:1px solid rgba(158,183,199,0.22);border-radius:8px;padding:10px 12px;color:var(--txt);cursor:pointer;}
+.mission-btn.active,.mission-btn:hover{border-color:var(--accent);background:rgba(23,61,68,0.86);}
+.mission-name{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700;margin-bottom:3px;}
+.mission-tag{font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;background:rgba(88,247,178,0.14);color:var(--accent);}
+.mission-tag.storm{background:rgba(245,179,66,0.18);color:var(--amber);}
+.mission-tag.emergency{background:rgba(255,86,86,0.18);color:var(--red);}
+.mission-desc{font-size:11.5px;color:var(--muted);line-height:1.35;}
+.metrics-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:14px;}
+.metric-box{background:rgba(14,28,41,0.82);border:1px solid rgba(158,183,199,0.2);border-radius:7px;padding:6px 12px;min-width:86px;}
+.metric-label{font-family:var(--mono);font-size:9.5px;color:var(--muted);letter-spacing:0.08em;}
+.metric-value{font-family:var(--mono);font-size:16px;font-weight:700;color:var(--txt);margin-top:2px;}
+.metric-value.good{color:var(--accent);}
+.metric-value.warn{color:var(--amber);}
+.metric-value.bad{color:var(--red);}
+.crash-reason-box{background:rgba(74,18,22,0.65);border:1px solid rgba(255,86,86,0.5);border-radius:8px;padding:10px 12px;margin-bottom:14px;font-family:var(--mono);font-size:12.5px;color:#ffd0d0;}
+.controls-strip{display:flex;flex-wrap:wrap;gap:6px 12px;font-family:var(--mono);font-size:11px;color:var(--muted);padding:10px 12px;border-radius:7px;background:rgba(10,22,33,0.72);border:1px solid rgba(158,183,199,0.15);margin-bottom:14px;}
+.controls-strip kbd{background:rgba(255,255,255,0.12);color:var(--txt);padding:1px 5px;border-radius:4px;font-family:var(--mono);font-size:10.5px;}
+.action-row{display:flex;gap:8px;justify-content:flex-end;}
+.btn-primary,.btn-secondary{border-radius:6px;padding:8px 15px;font-size:12px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;cursor:pointer;border:1px solid transparent;}
+.btn-primary{background:var(--accent);color:#071915;}
+.btn-secondary{background:rgba(255,255,255,0.08);border-color:rgba(158,183,199,0.28);color:var(--txt);}
